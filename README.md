@@ -1,6 +1,5 @@
 Here's the complete `README.md` with code and Hinglish explanations in one code block:
 
-```markdown
 # JavaScript Basics
 
 Is README mein hum JavaScript ke basic concepts ko samjhenge, saath mein thode Hinglish (Hindi + English) comments bhi diye hain. Chalo shuru karte hain!
