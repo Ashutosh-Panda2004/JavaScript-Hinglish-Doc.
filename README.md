@@ -369,12 +369,6 @@ console.log(false || "Hello"); // Output: Hello (first truthy value)
 
 ---
 
-# JavaScript Basics
-
-Welcome to the comprehensive guide on JavaScript basics! Yeh README file aapko JavaScript ke core concepts ko samajhne mein madad karega. Har concept ko detailed explanation ke sath code examples ke through cover kiya gaya hai. 
-
----
-
 ## 8.7 Objects in JavaScript
 
 Objects ka use multiple linked entities ko ek saath group karne ke liye kiya jata hai. Example ke liye, agar aapko ek shape `circle` ka radius, diameter, aur circumference ko ek entity ke roop mein represent karna hai, toh aap ek object use karenge.
