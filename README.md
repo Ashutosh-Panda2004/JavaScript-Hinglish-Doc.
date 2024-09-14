@@ -361,7 +361,7 @@ if (!a1) {
 - **Truthy Values**: Falsey values ke alawa sabhi values truthy hoti hain.
 
 ```javascript
-console.log(false || "lawda"); // Output: lawda (first truthy value)
+console.log(false || "Hello"); // Output: Hello (first truthy value)
 ```
 
 *Explanation:*  
