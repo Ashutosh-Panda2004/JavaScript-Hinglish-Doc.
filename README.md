@@ -615,3 +615,499 @@ JavaScript mein garbage collection automatic hoti hai, jo unused variables aur o
 - **Garbage Collection**: JavaScript automatic memory management provide karta hai. C ya C++ ke comparison mein, jahan manual memory allocation aur deallocation hoti hai, JavaScript mein garbage collector background mein kaam karta hai.
 
 ---
+
+### 9\. Objects
+
+JavaScript me objects key-value pairs ka collection hote hain. Ye different data types ko store karne aur manage karne ke liye useful hote hain.
+
+#### 9.1. Creating Objects
+
+**Object Literals**:
+
+Objects ko define karne ka sabse common tareeka object literals ka use karke hota hai.
+
+```javascript
+let person = {
+    name: "Ashutosh",
+    age: 25,
+    greet() {
+        console.log("Hello, " + this.name);
+    }
+};
+```
+
+**Factory Functions**:
+
+Factory functions objects banane ke liye use hote hain.
+
+```javascript
+function createPerson(name, age) {
+    return {
+        name,
+        age,
+        greet() {
+            console.log("Hello, " + this.name);
+        }
+    };
+}
+
+let person1 = createPerson("Ashutosh", 25);
+person1.greet(); // Output: Hello, Ashutosh
+```
+
+**Constructor Functions**:
+
+Constructor functions bhi objects create karne ke liye use hote hain, aur ye `new` keyword ke sath call kiye jate hain.
+
+```javascript
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+    this.greet = function() {
+        console.log("Hello, " + this.name);
+    };
+}
+
+let person2 = new Person("Ashutosh", 25);
+person2.greet(); // Output: Hello, Ashutosh
+```
+
+#### 9.2. Accessing and Modifying Object Properties
+
+**Accessing Properties**:
+
+Object properties ko dot notation ya bracket notation se access kiya ja sakta hai.
+
+```javascript
+console.log(person.name); // Dot notation
+console.log(person["age"]); // Bracket notation
+```
+
+**Modifying Properties**:
+
+Properties ko modify bhi kiya ja sakta hai.
+
+```javascript
+person.age = 26; // Dot notation
+person["name"] = "Panda"; // Bracket notation
+```
+
+**Adding New Properties**:
+
+Nayi properties add kar sakte hain.
+
+```javascript
+person.email = "ashutosh@example.com"; // Add new property
+```
+
+**Deleting Properties**:
+
+Properties ko delete bhi kiya ja sakta hai.
+
+```javascript
+delete person.email; // Delete a property
+```
+
+#### 9.3. Methods in Objects
+
+**Object Methods**:
+
+Objects ke andar methods define kar sakte hain jo unki properties ko operate karte hain.
+
+```javascript
+let person = {
+    name: "Ashutosh",
+    greet() {
+        console.log("Hello, " + this.name);
+    }
+};
+
+person.greet(); // Output: Hello, Ashutosh
+```
+
+**Getter and Setter Methods**:
+
+Getter aur setter methods use karke properties ko read aur modify kar sakte hain.
+
+```javascript
+let person = {
+    firstName: "Ashutosh",
+    lastName: "Panda",
+    get fullName() {
+        return this.firstName + " " + this.lastName;
+    },
+    set fullName(name) {
+        [this.firstName, this.lastName] = name.split(" ");
+    }
+};
+
+console.log(person.fullName); // Access getter
+person.fullName = "John Doe"; // Use setter
+console.log(person.firstName); // Output: John
+console.log(person.lastName); // Output: Doe
+```
+
+#### 9.4. Object Iteration
+
+**For...in Loop**:
+
+Objects ke properties ko iterate karne ke liye `for...in` loop use karte hain.
+
+```javascript
+for (let key in person) {
+    console.log(key + ": " + person[key]);
+}
+```
+
+**Object.keys()**:
+
+Object ki keys ko array me convert karta hai.
+
+```javascript
+let keys = Object.keys(person);
+console.log(keys); // Output: Array of property names
+```
+
+**Object.values()**:
+
+Object ki values ko array me convert karta hai.
+
+```javascript
+let values = Object.values(person);
+console.log(values); // Output: Array of property values
+```
+
+**Object.entries()**:
+
+Object ke key-value pairs ko array of arrays me convert karta hai.
+
+```javascript
+let entries = Object.entries(person);
+console.log(entries); // Output: Array of [key, value] pairs
+```
+
+#### 9.5. Prototypes and Inheritance
+
+**Prototype Property**:
+
+Prototype property se methods ko share kar sakte hain.
+
+```javascript
+function Person(name) {
+    this.name = name;
+}
+
+Person.prototype.greet = function() {
+    console.log("Hello, " + this.name);
+};
+
+let person1 = new Person("Ashutosh");
+person1.greet(); // Output: Hello, Ashutosh
+```
+
+**Inheritance**:
+
+Inheritance se ek class ki properties aur methods ko doosri class me extend kar sakte hain.
+
+```javascript
+function Employee(name, jobTitle) {
+    Person.call(this, name); // Call parent constructor
+    this.jobTitle = jobTitle;
+}
+
+Employee.prototype = Object.create(Person.prototype); // Inherit methods from Person
+Employee.prototype.constructor = Employee;
+
+let employee1 = new Employee("Ashutosh", "Developer");
+console.log(employee1.name); // Output: Ashutosh
+console.log(employee1.jobTitle); // Output: Developer
+employee1.greet(); // Output: Hello, Ashutosh
+```
+
+### 10\. Advanced Array Methods
+
+#### 10.1. `find()` Method
+
+**Finding an Element**:
+
+`find()` method se array me se ek element ko condition ke basis pe find kar sakte hain.
+
+```javascript
+let courses = [
+    { id: 1, name: 'JavaScript' },
+    { id: 2, name: 'Python' }
+];
+
+let course = courses.find(c => c.name === 'JavaScript');
+console.log(course); // Output: { id: 1, name: 'JavaScript' }
+```
+
+#### 10.2. `filter()` Method
+
+**Filtering an Array**:
+
+`filter()` method se ek condition ke basis pe array ke elements ko filter kar sakte hain.
+
+```javascript
+let numbers = [-1, 2, 3, -4, 5];
+let positiveNumbers = numbers.filter(n => n > 0);
+console.log(positiveNumbers); // Output: [2, 3, 5]
+```
+
+#### 10.3. `map()` Method
+
+**Mapping Elements**:
+
+`map()` method se array ke elements ko kisi function ke basis pe map kar sakte hain.
+
+```javascript
+let numbers = [1, 2, 3];
+let doubled = numbers.map(n => n * 2);
+console.log(doubled); // Output: [2, 4, 6]
+```
+
+#### 10.4. `reduce()` Method
+
+**Reducing an Array**:
+
+`reduce()` method se array ke elements ko ek single value me reduce kar sakte hain.
+
+```javascript
+let numbers = [1, 2, 3, 4];
+let sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+console.log(sum); // Output: 10
+```
+
+#### 10.5. `sort()` Method
+
+**Sorting an Array**:
+
+`sort()` method se array ko sort kar sakte hain. Numbers ko ascending ya descending order me sort karna.
+
+```javascript
+let numbers = [4, 2, 5, 1, 3];
+numbers.sort((a, b) => a - b); // Ascending order
+console.log(numbers); // Output: [1, 2, 3, 4, 5]
+```
+
+**Sorting Objects**:
+
+Objects ko kisi property ke basis pe sort kar sakte hain.
+
+```javascript
+let people = [
+    { name: 'Ashutosh', age: 25 },
+    { name: 'Panda', age: 30 }
+];
+
+people.sort((a, b) => a.age - b.age);
+console.log(people); // Output: Sorted by age
+```
+
+#### 10.6. `some()` and `every()` Methods
+
+**`some()`**:
+
+`some()` method se check kar sakte hain ki array me kisi element ne condition ko meet kiya hai ya nahi.
+
+```javascript
+let numbers = [1, 2, 3, 4];
+let hasNegative = numbers.some(n => n < 0);
+console.log(hasNegative); // Output: false
+```
+
+**`every()`**:
+
+`every()` method se check kar sakte hain ki array ke sabhi elements ne condition ko meet kiya hai ya nahi.
+
+```javascript
+let numbers = [1, 2, 3, 4];
+let allPositive = numbers.every(n => n > 0);
+console.log(allPositive); // Output: true
+```
+
+### 11\. Additional Array Methods
+
+#### 11.1. `findIndex()` Method
+
+**Finding Index of an Element**:
+
+`findIndex()` method se array me kisi element ka index find kar sakte hain.
+
+```javascript
+let numbers = [1, 2, 3, 4, 5];
+let index = numbers.findIndex(n => n === 3);
+console.log(index); // Output: 2
+```
+
+#### 11.2. `flat()` and `flatMap()` Methods
+
+**Flattening Arrays**:
+
+`flat()` method se nested arrays ko flatten kar sakte hain. Ye method nested arrays ko specified depth tak flatten karta hai.
+
+```javascript
+let nestedArray = [1, [2, [3, 4]]];
+let flatArray = nestedArray.flat(2); // Flatten 2 levels deep
+console.log(flatArray); // Output: [1, 2, 3, 4]
+```
+
+**Flattening with Mapping**:
+
+`flatMap()` method ek array ko map karta hai aur uske baad result ko flatten bhi karta hai. Ye method ek hi step me map aur flatten dono operations perform karta hai.
+
+```javascript
+let arrays = [[1, 2, 3], [4, 5], [6]];
+let flatMappedArray = arrays.flatMap(x => x.map(n => n * 2));
+console.log(flatMappedArray); // Output: [2, 4, 6, 8, 10, 12]
+```
+
+### 12\. Additional Array Operations
+
+#### 12.1. `splice()` Method
+
+**Adding and Removing Elements**:
+
+`splice()` method se array me elements ko add aur remove kar sakte hain. Ye method directly array ko modify karta hai.
+
+```javascript
+let numbers = [1, 2, 3, 4, 5];
+
+// Adding elements
+numbers.splice(2, 0, 6, 7); // Syntax: arr.splice(index, deleteCount, item1, item2, ...)
+console.log(numbers); // Output: [1, 2, 6, 7, 3, 4, 5]
+
+// Removing elements
+numbers.splice(4, 2); // Syntax: arr.splice(index, deleteCount)
+console.log(numbers); // Output: [1, 2, 6, 7, 5]
+```
+
+#### 12.2. `slice()` Method
+
+**Extracting Subarrays**:
+
+`slice()` method se array ka ek subarray extract kar sakte hain bina original array ko modify kiye.
+
+```javascript
+let numbers = [1, 2, 3, 4, 5];
+let subArray = numbers.slice(1, 4); // Syntax: arr.slice(startIndex, endIndex)
+console.log(subArray); // Output: [2, 3, 4]
+```
+
+**Full Slicing**:
+
+Full slicing se array ka part extract kar sakte hain start index se lekar end tak.
+
+```javascript
+let numbers = [1, 2, 3, 4, 5];
+let slicedArray = numbers.slice(2); // From index 2 to end
+console.log(slicedArray); // Output: [3, 4, 5]
+```
+
+#### 12.3. `join()` Method
+
+**Joining Array Elements into a String**:
+
+`join()` method se array ke elements ko ek string me join kar sakte hain, separator specify karke.
+
+```javascript
+let numbers = [1, 2, 3, 4, 5];
+let joinedString = numbers.join('-'); // Syntax: arr.join(separator)
+console.log(joinedString); // Output: "1-2-3-4-5"
+```
+
+#### 12.4. `split()` Method
+
+**Splitting a String into an Array**:
+
+`split()` method se ek string ko array me split kar sakte hain, specified separator ke basis pe.
+
+```javascript
+let str = "Hello there how are you?";
+let strArray = str.split(' '); // Syntax: str.split(separator)
+console.log(strArray); // Output: ["Hello", "there", "how", "are", "you?"]
+```
+
+### 13\. String Manipulation
+
+#### 13.1. String Methods
+
+**Basic String Methods**:
+
+JavaScript me strings ko manipulate karne ke liye kai methods available hain.
+
+```javascript
+let str = "   Ashutosh Panda   ";
+
+console.log(str.length); // Length of the string
+console.log(str.trim()); // Removes whitespace from both ends
+console.log(str.toUpperCase()); // Converts to uppercase
+console.log(str.toLowerCase()); // Converts to lowercase
+console.log(str.includes("Panda")); // Checks if substring is present
+console.log(str.startsWith("Ash")); // Checks if string starts with specified value
+console.log(str.endsWith("Panda")); // Checks if string ends with specified value
+console.log(str.slice(3, 10)); // Extracts a section of the string
+console.log(str.replace("Panda", "Kumar")); // Replaces specified substring
+```
+
+**Template Literals**:
+
+Multiline strings aur placeholders ke saath strings create karne ke liye backticks (`) ka use karte hain.
+
+```javascript
+let name = "Ashutosh";
+console.log(`Hello ${name},
+How are you?
+Regards.`);
+```
+
+### 14\. Date and Time
+
+JavaScript me date aur time handle karne ke liye `Date` object ka use hota hai.
+
+#### 14.1. Creating a Date Object
+
+**Current Date and Time**:
+
+```javascript
+let now = new Date();
+console.log(now); // Current date and time
+```
+
+**Specific Date and Time**:
+
+```javascript
+let birthday = new Date(1998, 8, 22); // year, month (0-indexed), day
+console.log(birthday);
+```
+
+**Formatting Date and Time**:
+
+```javascript
+console.log(now.toDateString()); // Date in readable format
+console.log(now.toTimeString()); // Time in readable format
+console.log(now.toISOString()); // ISO format
+```
+
+### 15\. Common Array Operations
+
+#### 15.1. `some()` Method
+
+**Checking if Any Element Matches Condition**:
+
+```javascript
+let numbers = [1, 2, 3, 4];
+let hasNegative = numbers.some(n => n < 0);
+console.log(hasNegative); // Output: false
+```
+
+#### 15.2. `every()` Method
+
+**Checking if All Elements Match Condition**:
+
+```javascript
+let numbers = [1, 2, 3, 4];
+let allPositive = numbers.every(n => n > 0);
+console.log(allPositive); // Output: true
+```
+
