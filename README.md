@@ -369,3 +369,255 @@ console.log(false || "Hello"); // Output: Hello (first truthy value)
 
 ---
 
+# JavaScript Basics
+
+Welcome to the comprehensive guide on JavaScript basics! Yeh README file aapko JavaScript ke core concepts ko samajhne mein madad karega. Har concept ko detailed explanation ke sath code examples ke through cover kiya gaya hai. 
+
+---
+
+## 8.7 Objects in JavaScript
+
+Objects ka use multiple linked entities ko ek saath group karne ke liye kiya jata hai. Example ke liye, agar aapko ek shape `circle` ka radius, diameter, aur circumference ko ek entity ke roop mein represent karna hai, toh aap ek object use karenge.
+
+```javascript
+console.log("Hello jee !");
+
+// Object definition with properties and method
+let rectangle = {
+    length: 12,
+    breadth: 11,
+    draw: function() {  // Method inside the object
+        console.log("Draw a Rectangle");
+    }
+};
+
+console.log(rectangle.length);  // Dot notation
+console.log(rectangle['length']); // Bracket notation
+console.log(rectangle.draw); // Method
+
+// Creating an empty object
+let obj1 = {};
+
+// Factory Function for object creation
+function createRectangle(length, breadth) {
+    return {
+        length,
+        breadth,
+        draw: function() {
+            console.log("Draw a Rectangle");
+        }
+    };
+}
+
+let rectangleObj1 = createRectangle(12, 32);
+console.log(rectangleObj1);
+
+// Constructor Function for object creation
+function Rectangle(length, breadth) {
+    this.length = length;
+    this.breadth = breadth;
+    this.draw = function() {
+        console.log('drawing');
+    };
+}
+
+let rectangleObj2 = new Rectangle(56, 67);
+console.log(rectangleObj2);
+
+// Proving functions are objects
+// More explanation can be found [here](https://drive.google.com/file/d/1mj7ioPn0uS68f72JQ1CSEmFMilNdx6Vb/view?usp=sharing)
+
+// Dynamic Nature of Objects
+let circle = {
+    radius: 6, 
+    diameter: 12
+};
+
+circle.color = "pink"; // Adding a property
+console.log(circle);
+
+delete circle.color;  // Removing a property
+console.log(circle);
+```
+
+*Explanation:*  
+- **Objects**: Multiple related properties ko ek single entity ke roop mein group karte hain.
+- **Factory Function**: Reusable function for creating objects with similar properties and methods.
+- **Constructor Function**: Special function for creating and initializing objects.
+
+## 8.8 Primitives vs Reference Types
+
+JavaScript mein values do types ki hoti hain: Primitives aur Reference Types.
+
+### Primitives
+
+```javascript
+// Primitives
+let a = 10;
+let b = a;
+console.log("\nBefore a's increment-->  a: " + a);
+console.log("Before a's increment-->  b: " + b);
+a++;
+console.log("After a's increment-->  a: " + a);
+console.log("After a's increment-->  b: " + b);
+```
+
+*Explanation:*  
+- **Primitives**: Value ko directly copy kiya jata hai. Changes ek value pe effect nahi daalte dusri values pe.
+
+### Reference Types
+
+```javascript
+// Reference Types
+let a1 = { value: 10 };
+let b1 = a1;
+console.log("\nBefore value increment-->  a1: " + a1.value);
+console.log("Before value increment-->  b1: " + b1.value);
+a1.value++;
+console.log("After value increment-->  a1: " + a1.value);
+console.log("After value increment-->  b1: " + b1.value);
+```
+
+*Explanation:*  
+- **Reference Types**: Object ka reference (address) copy kiya jata hai. Changes ek object pe sabhi references pe effect daalte hain.
+
+### Functions with Primitives and Objects
+
+```javascript
+// Passing primitives to functions (Pass by Value)
+let a2 = 10;
+function increment(a) {
+    a++;
+}
+increment(a2);
+console.log("\n" + a2); // 10
+
+// Passing objects to functions (Pass by Reference)
+let a3 = { value: 10 };
+function inc(a) {
+    a.value++;
+}
+inc(a3);
+console.log("\n" + a3.value); // 11
+```
+
+*Explanation:*  
+- **Pass by Value**: Primitive values functions mein pass karte waqt copy create hoti hai.
+- **Pass by Reference**: Objects functions mein pass karte waqt reference (address) pass hota hai, jisse changes reflect hote hain.
+
+## 8.9 Iterating Over Objects
+
+Objects ke properties ko iterate karne ke liye `for-in` aur `for-of` loops use kiye ja sakte hain.
+
+### For-in Loop
+
+```javascript
+let square = {
+    sides: 4,
+    length: 12,
+    color: "Yellow",
+    property: "Sundar Square"
+};
+
+// Print all key-value pairs of the object
+for (let key in square) {
+    console.log(key, square[key]);
+}
+```
+
+*Explanation:*  
+- **For-in Loop**: Object ke sabhi properties ko iterate karta hai.
+
+### For-of Loop
+
+```javascript
+// Printing keys using for-of loop
+for (let key of Object.keys(square)) {
+    console.log(key);
+}
+
+// Printing key-value pairs using for-of loop
+for (let [key, value] of Object.entries(square)) {
+    console.log(key, value);
+}
+```
+
+*Explanation:*  
+- **For-of Loop**: `Object.keys()` aur `Object.entries()` methods ke saath use kiya jata hai.
+
+### Checking Property Existence
+
+```javascript
+if ("length" in square) {
+    console.log("Present");
+} else {
+    console.log("Absent");
+}
+```
+
+*Explanation:*  
+- **Checking Property**: `in` operator se check kiya jata hai ki object mein specific property hai ya nahi.
+
+## 8.10 Object Cloning
+
+Objects ko clone karne ke liye 3 methods use kiye ja sakte hain:
+
+### 1. Iteration
+
+```javascript
+let src = {
+    name: "John",
+    age: 30,
+    city: "New York"
+};
+
+let dest = {};
+for (let key in src) {
+    dest[key] = src[key];
+}
+console.log(dest);
+```
+
+*Explanation:*  
+- **Iteration**: Source object ke properties ko manually copy kiya jata hai destination object mein.
+
+### 2. Object.assign
+
+```javascript
+let src1 = {
+    name: "John",
+    age: 30,
+    city: "New York"
+};
+
+let dest1 = Object.assign({}, src1);
+console.log(dest1);
+```
+
+*Explanation:*  
+- **Object.assign()**: Source object ko destination object mein copy karta hai.
+
+### 3. Spread Operator
+
+```javascript
+let src2 = {
+    name: "John",
+    age: 30,
+    city: "New York"
+};
+
+let dest2 = { ...src2 };
+console.log(dest2);
+```
+
+*Explanation:*  
+- **Spread Operator**: Object ke properties ko ek naya object mein spread karta hai.
+
+## 8.11 Garbage Collection
+
+JavaScript mein garbage collection automatic hoti hai, jo unused variables aur objects ko deallocate karti hai. 
+
+*Explanation:*  
+- **Garbage Collection**: JavaScript automatic memory management provide karta hai. C ya C++ ke comparison mein, jahan manual memory allocation aur deallocation hoti hai, JavaScript mein garbage collector background mein kaam karta hai.
+
+---
